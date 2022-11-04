@@ -1,0 +1,38 @@
+body {
+    background-color: rgb(73, 72, 72);
+    color: rgb(225, 222, 222);
+    padding: 40px 0px 0px 40px;
+}
+
+#controller {
+    p {
+        width: 50px;
+        height: 20px;
+        background-color: grey;
+        margin: 2px;
+    }
+}
+
+#mainDisplay, #currentDisplay {
+    width: 250px;
+    height: 25px;
+    border: 1px solid white;
+}
+
+#display, #finalExp {
+    display: inline;
+}
+
+#display {
+    background-color: red;
+}
+
+#history {
+    span {
+        display: block;
+    }
+}
+
+#credit, #author {
+    text-align: center;
+}
