@@ -127,6 +127,7 @@ function Controller({formula, setFormula, current, setCurrent, history, setHisto
       //  ** to resolve this
       //  ** use a variable to keep the memory of updates until you finally call the setState with the finalized value like done below;
       //  ** or use updater functions (arrow/anonymous functions) [mentioned in docs]
+      //  ** or use flushsync() [https://reactjs.org/docs/react-dom.html#flushsync]
 
       evalCounter++;  // this variable keeps track of evalute operator presses which is required by most of the programme.
       let exp = formula;  // tentatively stores the memory and updates of formula state to prevent batched renders.
@@ -139,7 +140,7 @@ function Controller({formula, setFormula, current, setCurrent, history, setHisto
           // setFormula(formula.replace(/[\-][\-]/, "+"));  // batched call need promise or settimeout
           exp = exp.replace(/[\-][\-]/, "+");   // ensures synchronous behaviour
         }
-        setHistory(history.concat(<span key={key++}>{exp}</span>));
+        setHistory(history.concat(<span key={key++}><i>step{key + 1}{`->`}&#160;&#160;&#160;&#160;</i>{exp}</span>));
         // setFormula(new String(eval(formula)));
         // setCurrent(new String(eval(formula)));
         // setFormula(`${eval(formula)}`);
@@ -187,15 +188,21 @@ function Controller({formula, setFormula, current, setCurrent, history, setHisto
 function MyCalculator() {
   const [formula, setFormula] = useState("0");
   const [current, setCurrent] = useState("0");
-  const [history, setHistory] = useState(["history"]);
+  const [history, setHistory] = useState([""]);
 
   return (
-    <div>
-      <Display formula={formula} current={current} history={history} />
-      <Controller formula={formula} setFormula={setFormula} current={current} setCurrent={setCurrent} history={history} setHistory={setHistory} />
-      <p id="credit">Designed and Coded By</p>
-      <p id="author">Aniket Gunjekar</p>
-      {history.length >= 2 && <div id="history">{history}</div>}
+    <div id="background">
+      <div id="calculator">
+        <Display formula={formula} current={current} history={history} />
+        <Controller formula={formula} setFormula={setFormula} current={current} setCurrent={setCurrent} history={history} setHistory={setHistory} />
+      </div>
+      
+      {history.length >= 2 && <div id="history"><p>history</p><div id="scrollhistory">{history}</div></div>}
+
+      <div id="footer">
+        <p id="credit">Designed and Coded By</p>
+        <p id="author"><a href="https://github.com/aniketgunjekar" target="_blank">Aniket Gunjekar</a></p>
+      </div>
     </div>
   );
 }
