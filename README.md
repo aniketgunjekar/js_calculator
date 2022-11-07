@@ -4,4 +4,4 @@
 link - https://codesandbox.io/s/js-calculator-iim25w
 
 # website link
-** https://aniketgunjekar.github.io/js_calculator/
+# https://aniketgunjekar.github.io/js_calculator/
